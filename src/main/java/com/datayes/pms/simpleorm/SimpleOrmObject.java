@@ -3,6 +3,7 @@ package com.datayes.pms.simpleorm;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Editor: intellij@Ubuntu
@@ -10,22 +11,21 @@ import java.sql.SQLException;
  * Date: 3/16/14
  * Time: 7:27 PM
  */
-class SimpleOrmThread implements Runnable {
+class SimpleOrmObject {
 
-    private Connection connection = null;
+    private static Connection connection = null;
 
-    SimpleOrmThread(String url, String user, String password) throws ClassNotFoundException, SQLException {
+    private static Statement statement = null;
+
+    SimpleOrmObject(String url, String user, String password) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         connection = DriverManager.getConnection(url, user, password);
+        statement = connection.createStatement();
     }
 
-    SimpleOrmThread(String url) throws ClassNotFoundException, SQLException {
+    SimpleOrmObject(String url) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         connection = DriverManager.getConnection(url);
-    }
-
-    @Override
-    public void run() {
-
+        statement = connection.createStatement();
     }
 }
