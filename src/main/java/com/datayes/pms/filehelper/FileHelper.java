@@ -11,19 +11,25 @@ import java.io.File;
  */
 public class FileHelper {
 
-    /*
-        *
-        * Get path separator of whatever operating system
-        *
+    /**
+     *
+     * Public methods
+     *
+     */
+
+    /**
+     *
+     * Get path separator of whatever operating system
+     *
      */
     public static String getSeparator() {
         return System.getProperty("file.separator");
     }
 
-    /*
-        *
-        * Get project current path
-        *
+    /**
+     *
+     * Get project current path
+     *
      */
     public static String getCurrentPath() {
         File file = new File("");

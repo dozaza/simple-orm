@@ -18,10 +18,10 @@ import java.util.List;
  */
 public class Selector {
 
-    /*
-        *
-        * Do select operation to a table of database
-        *
+    /**
+     *
+     * Do select operation to a table of database
+     *
      */
     public static <T> List<T> select(Statement statement, Query query, Class<T> clazz) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, SQLException {
         String sql = SqlParser.parse(query);

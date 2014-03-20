@@ -15,16 +15,16 @@ import java.util.Map;
 
 public class SqlParser {
 
-    /*
-        *
-        * Public methods
-        *
+    /**
+     *
+     * Public methods
+     *
      */
 
-    /*
-        *
-        * Parse a query and return a normal sql
-        *
+    /**
+     *
+     * Parse a query and return a normal sql
+     *
      */
     public static String parse(Query query) {
         SqlType type = query.getType();
@@ -55,16 +55,16 @@ public class SqlParser {
     }
 
 
-    /*
-        *
-        * Private methods
-        *
+    /**
+     *
+     * Private methods
+     *
      */
 
-    /*
-        *
-        * Create a Condition instance with symbols
-        *
+    /**
+     *
+     * Create a Condition instance with symbols
+     *
      */
     private static Condition getCondition(List<String> oneConditionSymbol, Map<String, Object> parameters) {
         String prefix = oneConditionSymbol.get(0);
@@ -79,10 +79,10 @@ public class SqlParser {
         return new Condition(prefix, sqlSymbol, parameter);
     }
 
-    /*
-        *
-        * Convert a SqlType instance to sql prefix
-        *
+    /**
+     *
+     * Convert a SqlType instance to sql prefix
+     *
      */
     private static String convertToSqlString(SqlType type) {
         switch (type) {
@@ -97,20 +97,20 @@ public class SqlParser {
         }
     }
 
-    /*
-        *
-        * Convert a Class name to table name
-        *
+    /**
+     *
+     * Convert a Class name to table name
+     *
      */
     private static String convertToSqlString(Class clazz) {
         Entity annotation = (javax.persistence.Entity)clazz.getAnnotation(javax.persistence.Entity.class);
         return annotation.name();
     }
 
-    /*
-        *
-        * Convert a list of Condition to a sql condition
-        *
+    /**
+     *
+     * Convert a list of Condition to a sql condition
+     *
      */
     private static String convertToSqlString(List<Condition> conditionList) {
         String s = "";

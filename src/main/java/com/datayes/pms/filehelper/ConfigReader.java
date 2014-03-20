@@ -19,10 +19,15 @@ public class ConfigReader {
 
     private static Element rootElement = null;
 
-    /*
-        *
-        * Initialize ConfigReader with a file
-        *
+    /**
+     * Public methods
+     *
+     */
+
+    /**
+     *
+     * Initialize ConfigReader with a file
+     *
      */
     public static Boolean initialize(File file) {
         if ( file.exists() ) {
@@ -32,30 +37,30 @@ public class ConfigReader {
         return false;
     }
 
-    /*
-        *
-        * Initialize ConfigReader with a file path and name
-        *
+    /**
+     *
+     * Initialize ConfigReader with a file path and name
+     *
      */
     public static Boolean initialize(String path, String name) {
         File file = new File(path + FileHelper.getSeparator() + name);
         return initialize(file);
     }
 
-    /*
-        *
-        * Initialize ConfigReader with the project current path and a file name
-        *
+    /**
+     *
+     * Initialize ConfigReader with the project current path and a file name
+     *
      */
     public static Boolean initialize(String name) {
         String path = FileHelper.getCurrentPath();
         return initialize(path, name);
     }
 
-    /*
-        *
-        * Get element of a super element with a tag name
-        *
+    /**
+     *
+     * Get element of a super element with a tag name
+     *
      */
     public static Element getElement(Element element, String tagName) {
         if ( null == element || tagName == null ) {
@@ -68,36 +73,36 @@ public class ConfigReader {
         return (Element)list.item(0);
     }
 
-    /*
-        *
-        * Get element of root element with a tag name
-        *
+    /**
+     *
+     * Get element of root element with a tag name
+     *
      */
     public static Element getElement(String tagName) {
         return getElement(rootElement, tagName);
 
     }
 
-    /*
-        *
-        * Get root element
-        *
+    /**
+     *
+     * Get root element
+     *
      */
     public static Element getRootElement() {
         return rootElement;
     }
 
 
-    /*
-        *
-        * private methods
-        *
+    /**
+     *
+     * Private methods
+     *
      */
 
-    /*
-        *
-        * initialize root element with config file
-        *
+    /**
+     *
+     * initialize root element with config file
+     *
      */
     private static Boolean initRootElement(File file) {
         try {

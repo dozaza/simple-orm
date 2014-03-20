@@ -14,16 +14,16 @@ public class SimpleOrm {
 
     private static Map<String, SimpleOrmObject> map = new ConcurrentHashMap<>();
 
-    /*
-        *
-        * Public methods
-        *
+    /**
+     *
+     * Public methods
+     *
      */
 
-    /*
-        *
-        * Connect database with user & password, return a SimpleOrmObject
-        *
+    /**
+     *
+     * Connect database with user & password, return a SimpleOrmObject
+     *
      */
     public static SimpleOrmObject connect(String url, String user, String password) throws SQLException, ClassNotFoundException {
         SimpleOrmObject object = new SimpleOrmObject(url, user, password);
@@ -34,10 +34,10 @@ public class SimpleOrm {
         return object;
     }
 
-    /*
-        *
-        * Connect database with no user or password, return a SimpleOrmObject
-        *
+    /**
+     *
+     * Connect database with no user or password, return a SimpleOrmObject
+     *
      */
     public static SimpleOrmObject connect(String url) throws SQLException, ClassNotFoundException {
         SimpleOrmObject object = new SimpleOrmObject(url);
@@ -48,10 +48,10 @@ public class SimpleOrm {
         return object;
     }
 
-    /*
-        *
-        * Get a SimpleOrmObject with a url
-        *
+    /**
+     *
+     * Get a SimpleOrmObject with a url
+     *
      */
     public static SimpleOrmObject get(String url) {
         SimpleOrmObject object = map.get(url);
