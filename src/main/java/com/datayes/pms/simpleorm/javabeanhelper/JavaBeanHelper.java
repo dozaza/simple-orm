@@ -18,8 +18,17 @@ import java.util.List;
  */
 public class JavaBeanHelper {
 
+    /*&
+        *
+        * Public methods
+        *
+     */
 
-
+    /*
+        *
+        * Create a list of instance with a Class type and a ResultSet of SQL
+        *
+     */
     public static <T> List<T> createInstances(Class<T> clazz, ResultSet resultSet) throws NoSuchMethodException, SQLException, InvocationTargetException, IllegalAccessException, InstantiationException {
         List<T> list = new ArrayList<>();
         while (resultSet.next()) {
@@ -29,7 +38,17 @@ public class JavaBeanHelper {
         return list;
     }
 
+    /*
+        *
+        * Private methods
+        *
+     */
 
+    /*
+        *
+        * Create a default instance
+        *
+     */
     private static <T> T createEmptyInstance(Class<T> clazz) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor constructor = clazz.getDeclaredConstructor();
         boolean isAccessible = constructor.isAccessible();
@@ -39,6 +58,11 @@ public class JavaBeanHelper {
         return (T) constructor.newInstance();
     }
 
+    /*
+        *
+        * Create an instance and set value with ResultSet
+        *
+     */
     private static <T> T createInstance(Class<T> clazz, ResultSet resultSet) throws NoSuchMethodException, SQLException, IllegalAccessException, InstantiationException, InvocationTargetException {
         T instance = createEmptyInstance(clazz);
         Method[] methods = clazz.getDeclaredMethods();
