@@ -5,6 +5,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,19 @@ import java.util.List;
  */
 public class JavaBeanHelper {
 
-    public static <T> T createInstance(Class<T> clazz) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+
+
+    public static <T> List<T> createInstances(Class<T> clazz, ResultSet resultSet) throws NoSuchMethodException, SQLException, InvocationTargetException, IllegalAccessException, InstantiationException {
+        List<T> list = new ArrayList<>();
+        while (resultSet.next()) {
+            T instance = createInstance(clazz, resultSet);
+            list.add(instance);
+        }
+        return list;
+    }
+
+
+    private static <T> T createEmptyInstance(Class<T> clazz) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor constructor = clazz.getDeclaredConstructor();
         boolean isAccessible = constructor.isAccessible();
         if ( !isAccessible ) {
@@ -26,17 +39,27 @@ public class JavaBeanHelper {
         return (T) constructor.newInstance();
     }
 
-    public static <T> void initializeInstance(T instance, ResultSet resultSet) {
-        Class<T> clazz = (Class<T>) instance.getClass();
-
+    private static <T> T createInstance(Class<T> clazz, ResultSet resultSet) throws NoSuchMethodException, SQLException, IllegalAccessException, InstantiationException, InvocationTargetException {
+        T instance = createEmptyInstance(clazz);
         Method[] methods = clazz.getDeclaredMethods();
-        List<Column> columns = new ArrayList<>();
-
         for ( Method method : methods ) {
-            method.getAnnotation(javax.persistence.Column.class);
+            try {
+                Column annotation = method.getAnnotation(javax.persistence.Column.class);
+
+                String getterName = method.getName();
+                String setterName = "s" + getterName.substring(1);
+                Method setter = clazz.getDeclaredMethod(setterName);
+
+                String columnName = annotation.name();
+                Object value = resultSet.getObject(columnName);
+
+                setter.invoke(instance, value);
+            }
+            catch (NullPointerException e){  // No Column annotation method
+                // Do nothing
+            }
         }
-
-
-
+        return instance;
     }
+
 }
