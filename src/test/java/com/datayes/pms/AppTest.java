@@ -5,14 +5,10 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 
-public class AppTest extends TestCase
+public class SimpleOrmTest extends TestCase
 {
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
+
+    public SimpleOrmTest( String testName )
     {
         super( testName );
     }
