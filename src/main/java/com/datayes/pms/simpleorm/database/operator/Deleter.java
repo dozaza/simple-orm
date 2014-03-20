@@ -1,4 +1,4 @@
-package com.datayes.pms.simpleorm.database;
+package com.datayes.pms.simpleorm.database.operator;
 
 import java.sql.Statement;
 
@@ -10,7 +10,7 @@ import java.sql.Statement;
  */
 public class Deleter {
 
-    public static void delete(Statement statement, String sql) {
+    public static <T> void delete(Statement statement, String sql, Class<T> clazz) {
 
     }
 }
