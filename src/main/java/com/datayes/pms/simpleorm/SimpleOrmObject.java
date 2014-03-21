@@ -11,21 +11,29 @@ import java.sql.Statement;
  * Date: 3/16/14
  * Time: 7:27 PM
  */
-class SimpleOrmObject {
+public class SimpleOrmObject {
 
-    private static Connection connection = null;
+    private Connection connection = null;
 
-    private static Statement statement = null;
+    private Statement statement = null;
 
-    SimpleOrmObject(String url, String databaseName, String user, String password) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
+    SimpleOrmObject(String url, String databaseName, String user, String password) throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException {
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
         connection = DriverManager.getConnection(url, user, password);
         statement = connection.createStatement();
     }
 
-    SimpleOrmObject(String url, String databaseName) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
+    SimpleOrmObject(String url, String databaseName) throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException {
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
         connection = DriverManager.getConnection(url + "/" + databaseName);
         statement = connection.createStatement();
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public Statement getStatement() {
+        return statement;
     }
 }

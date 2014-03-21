@@ -25,7 +25,7 @@ public class SimpleOrm {
      * Connect database with user & password, return a SimpleOrmObject
      *
      */
-    public static SimpleOrmObject connect(String url, String databaseName, String user, String password) throws SQLException, ClassNotFoundException {
+    public static SimpleOrmObject connect(String url, String databaseName, String user, String password) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         SimpleOrmObject object = new SimpleOrmObject(url, databaseName, user, password);
         if ( map.containsKey(url) ) {
             throw new RuntimeException("The database " + url + " is already existed");
@@ -39,7 +39,7 @@ public class SimpleOrm {
      * Connect database with no user or password, return a SimpleOrmObject
      *
      */
-    public static SimpleOrmObject connect(String url, String databaseName) throws SQLException, ClassNotFoundException {
+    public static SimpleOrmObject connect(String url, String databaseName) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         SimpleOrmObject object = new SimpleOrmObject(url, databaseName);
         if ( map.containsKey(url) ) {
             throw new RuntimeException("The database " + url + " is already existed");
