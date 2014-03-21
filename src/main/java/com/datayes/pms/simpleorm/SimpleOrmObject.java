@@ -17,15 +17,15 @@ class SimpleOrmObject {
 
     private static Statement statement = null;
 
-    SimpleOrmObject(String url, String user, String password) throws ClassNotFoundException, SQLException {
+    SimpleOrmObject(String url, String databaseName, String user, String password) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         connection = DriverManager.getConnection(url, user, password);
         statement = connection.createStatement();
     }
 
-    SimpleOrmObject(String url) throws ClassNotFoundException, SQLException {
+    SimpleOrmObject(String url, String databaseName) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
-        connection = DriverManager.getConnection(url);
+        connection = DriverManager.getConnection(url + "/" + databaseName);
         statement = connection.createStatement();
     }
 }
